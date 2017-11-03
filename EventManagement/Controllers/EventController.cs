@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EventManagement.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,18 +11,28 @@ namespace EventManagement.Controllers
     public class EventController : Controller
     {
         // GET: Event
-        public string Index()
+        public ActionResult Index()
         {
-            return "Hello I am in Event.Index()";
-            //return Content("Hello I am in Event.Index() ","JSON");
+            var events = GetEvents();
+            return View(events);
         }
 
         //Get Event/Details
-        public string Details(int eventId)
+        public ActionResult Details(int id)
         {
-            string message = HttpUtility.HtmlEncode("Hello I am in Event.Details() " + eventId);
-            return message;
-            //return Content("Hello I am in Event.Details() ","JSON");
+            var eventData = GetEvents().SingleOrDefault(e => e.Id == id);
+            if (eventData == null)
+                return HttpNotFound();
+            return View(eventData);
+        }
+
+        private IEnumerable<Event> GetEvents()
+        {
+            return new List<Event>
+            {
+                new Event { Id=1,Name="Introduction to C#",EventDate= DateTime.UtcNow },
+                new Event { Id=2,Name="Get Started Mobility",EventDate= DateTime.UtcNow }
+            };
         }
 
         //Redirect to URL
