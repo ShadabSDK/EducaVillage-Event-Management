@@ -1,0 +1,5 @@
+TEST FILE ls;la';d
+
+\,sa.d
+'asd
+asd;asd

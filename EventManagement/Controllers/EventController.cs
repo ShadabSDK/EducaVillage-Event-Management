@@ -17,9 +17,9 @@ namespace EventManagement.Controllers
         }
 
         //Get Event/Details
-        public string Details(int eventID)
+        public string Details(int eventId)
         {
-            string message = HttpUtility.HtmlEncode("Hello I am in Event.Details() " + eventID);
+            string message = HttpUtility.HtmlEncode("Hello I am in Event.Details() " + eventId);
             return message;
             //return Content("Hello I am in Event.Details() ","JSON");
         }
