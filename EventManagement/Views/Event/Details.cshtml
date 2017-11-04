@@ -1,4 +1,4 @@
-﻿
+﻿@model EventManagement.Models.Event
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,6 +7,8 @@
 <h2>Details</h2>
 
 <strong>
-    @ViewBag.EventData.Name , @ViewBag.EventData.EventDate.ToString("dd/mm/yyyy")
+    @Model.Name 
+    <br />
+    @Model.EventDate.ToString("MM/dd/yyyy")
 </strong>
 

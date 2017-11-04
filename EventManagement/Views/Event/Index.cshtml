@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<EventManagement.Models.Event>
 
 @{
     ViewBag.Title = ViewData["Title"];
@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var data in (IEnumerable< EventManagement.Models.Event>)ViewData["events"])
+        @foreach (var data in Model)
         {
             <tr>
                 <td>@Html.ActionLink(data.Name,"Details",new {id=data.Id })</td>

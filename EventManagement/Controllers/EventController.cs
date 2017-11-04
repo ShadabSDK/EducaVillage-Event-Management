@@ -14,19 +14,17 @@ namespace EventManagement.Controllers
         public ActionResult Index()
         {
             var events = GetEvents();
-            ViewData["events"] = events;
-            ViewData["Title"] = "Events";
-            return View();
+            return View(events);
         }
 
         //Get Event/Details
         public ActionResult Details(int id)
         {
             var eventData = GetEvents().SingleOrDefault(e => e.Id == id);
-            ViewBag.EventData = eventData;
+            
             if (eventData == null)
                 return HttpNotFound();
-            return View();
+            return View(eventData);
         }
 
         private IEnumerable<Event> GetEvents()
