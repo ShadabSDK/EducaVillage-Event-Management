@@ -14,6 +14,10 @@ namespace EventManagement.Controllers
         public ActionResult Index()
         {
             var events = GetEvents();
+            if(events==null && events.Count()<=0)
+            {
+                return View("NoRecordFound");
+            }
             return View(events);
         }
 

@@ -33,7 +33,14 @@
         @RenderBody()
         <hr />
         <footer>
+            @if (IsSectionDefined("Footer"))
+            {
+                @RenderSection("Footer")
+            }
+            else
+            {
             <p>&copy; @DateTime.Now.Year - Educavillage</p>
+            }
         </footer>
     </div>
 
