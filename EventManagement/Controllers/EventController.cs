@@ -1,4 +1,5 @@
-﻿using EventManagement.Models;
+﻿using EventManagement.Data;
+using EventManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,15 @@ namespace EventManagement.Controllers
 {
     public class EventController : Controller
     {
+        private EventDataAccess _eventDataAccess = null;
+        public EventController()
+        {
+            _eventDataAccess = new EventDataAccess();
+        }
         // GET: Event
         public ActionResult Index()
         {
-            var events = GetEvents();
+            var events = _eventDataAccess.GetEvents();
             if(events==null && events.Count()<=0)
             {
                 return View("NoRecordFound");
@@ -24,21 +30,21 @@ namespace EventManagement.Controllers
         //Get Event/Details
         public ActionResult Details(int id)
         {
-            var eventData = GetEvents().SingleOrDefault(e => e.Id == id);
+            var eventData = _eventDataAccess.GetEvents().SingleOrDefault(e => e.Id == id);
             
             if (eventData == null)
                 return HttpNotFound();
             return View(eventData);
         }
 
-        private IEnumerable<Event> GetEvents()
-        {
-            return new List<Event>
-            {
-                new Event { Id=1,Name="Introduction to C#",EventDate= DateTime.UtcNow },
-                new Event { Id=2,Name="Get Started Mobility",EventDate= DateTime.UtcNow }
-            };
-        }
+        //private IEnumerable<Event> GetEvents()
+        //{
+        //    return new List<Event>
+        //    {
+        //        new Event { Id=1,Title="Introduction to C#",EventDate= DateTime.UtcNow },
+        //        new Event { Id=2,Title="Get Started Mobility",EventDate= DateTime.UtcNow }
+        //    };
+        //}
 
         //Redirect to URL
         public RedirectResult RedirectToOtherSite()

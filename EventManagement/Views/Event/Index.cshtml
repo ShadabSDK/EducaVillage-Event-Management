@@ -17,7 +17,7 @@
         @foreach (var data in Model)
         {
             <tr>
-                <td>@Html.ActionLink(data.Name,"Details",new {id=data.Id })</td>
+                <td>@Html.ActionLink(data.Title,"Details",new {id=data.Id })</td>
                 <td>@data.EventDate</td>
             </tr>
         }
