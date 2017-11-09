@@ -11,15 +11,22 @@ namespace EventManagement.Controllers
 {
     public class EventController : Controller
     {
-        private EventDataAccess _eventDataAccess = null;
+        private ApplicationDbContext _context;
+
         public EventController()
         {
-            _eventDataAccess = new EventDataAccess();
+            _context = new ApplicationDbContext();
         }
-        // GET: Event
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+       // GET: Event
         public ActionResult Index()
         {
-            var events = _eventDataAccess.GetEvents();
+            var events = _context.Events;
             if(events==null && events.Count()<=0)
             {
                 return View("NoRecordFound");
@@ -30,7 +37,7 @@ namespace EventManagement.Controllers
         //Get Event/Details
         public ActionResult Details(int id)
         {
-            var eventData = _eventDataAccess.GetEvents().SingleOrDefault(e => e.Id == id);
+            var eventData = _context.Events.SingleOrDefault(e => e.Id == id);
             
             if (eventData == null)
                 return HttpNotFound();

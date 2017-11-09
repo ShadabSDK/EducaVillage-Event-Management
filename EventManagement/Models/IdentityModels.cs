@@ -20,10 +20,14 @@ namespace EventManagement.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("MyConnectionString", throwIfV1Schema: false)
         {
         }
+
+        public DbSet<Event> Events { get; set; }
+        public DbSet<EventType> EventTypes { get; set; }
 
         public static ApplicationDbContext Create()
         {
