@@ -12,8 +12,8 @@ namespace EventManagement.Models
         [Required]
         [StringLength(255)]
         public string Title { get; set; }
-        public System.DateTime EventDate { get; set; }
-        public System.DateTime EventTime { get; set; }
+        public Nullable<System.DateTime> EventDate { get; set; }
+        public Nullable<System.DateTime> EventTime { get; set; }
         public string Location { get; set; }
         public string Message { get; set; }
         public int EventTypeId { get; set; }

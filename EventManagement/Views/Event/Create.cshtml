@@ -1,0 +1,34 @@
+﻿@model EventManagement.Models.EventFormViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Save", "Event", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create Event</h4>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m=>m.Event.Title, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Event.Title, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Event.EventDate, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Event.EventDate, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Event.EventTypeId, new { @class = "col-md-2 control-label" })
+            @Html.DropDownListFor(m => m.Event.EventTypeId,new SelectList(Model.EventTypes,"Id","Name"),"Select Event Type", new { @class = "form-control" }) 
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+

@@ -23,7 +23,31 @@ namespace EventManagement.Controllers
             _context.Dispose();
         }
 
-       // GET: Event
+        [HttpGet]
+        public ActionResult Create()
+        {
+            //1 . Fetch the EventType List 
+            var eventTypes = _context.EventTypes.ToList();
+
+            //2. Create ViewModel to have both Event and Eventtype on a same model
+            var viewModel = new EventFormViewModel
+            {
+                EventTypes = eventTypes
+            };
+
+            return View(viewModel );
+        }
+
+        [HttpPost]
+        public ActionResult Save(Event @event)
+        {
+
+            _context.Events.Add(@event);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Event");
+        }
+
+        // GET: Event
         public ActionResult Index()
         {
             var events = _context.Events;
